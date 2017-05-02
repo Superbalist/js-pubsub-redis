@@ -1,0 +1,13 @@
+version: '2'
+services:
+  js-pubsub-redis:
+    build: .
+    depends_on:
+      - "redis"
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./examples:/usr/src/app/examples
+  redis:
+    image: redis:3.2
+    ports:
+      - "6379:6379"

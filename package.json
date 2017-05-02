@@ -1,0 +1,27 @@
+{
+  "name": "@superbalist/js-pubsub-redis",
+  "version": "0.0.1",
+  "description": "A Redis adapter for the js-pubsub package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Superbalist/js-pubsub-redis.git"
+  },
+  "keywords": [
+    "pubsub",
+    "redis"
+  ],
+  "author": "Superbalist.com a division of Takealot Online (Pty)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Superbalist/js-pubsub-redis/issues"
+  },
+  "homepage": "https://github.com/Superbalist/js-pubsub-redis#readme",
+  "dependencies": {
+    "@superbalist/js-pubsub": "0.0.1",
+    "redis": "^2.7.1"
+  }
+}
