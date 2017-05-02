@@ -1,4 +1,4 @@
-# js-pubsub-redis
+# @superbalist/js-pubsub-redis
 
 A Redis adapter for the [js-pubsub](https://github.com/Superbalist/js-pubsub) package.
 
