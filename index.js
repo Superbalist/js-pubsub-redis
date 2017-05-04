@@ -1,5 +1,7 @@
-"use strict";
+'use strict';
 
-var RedisPubSubAdapter = require('./src/RedisPubSubAdapter');
+/** @module pubsubRedis */
+
+let RedisPubSubAdapter = require('./src/RedisPubSubAdapter');
 
 module.exports = RedisPubSubAdapter;

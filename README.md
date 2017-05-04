@@ -17,10 +17,10 @@ npm install @superbalist/js-pubsub-redis
 ## Usage
 
 ```node
-"use strict";
+'use strict';
 
-var redis = require('redis');
-var RedisPubSubAdapter = require('@superbalist/js-pubsub-redis');
+let redis = require('redis');
+let RedisPubSubAdapter = require('@superbalist/js-pubsub-redis');
 
 let client = redis.createClient({
   host: 'redis',
