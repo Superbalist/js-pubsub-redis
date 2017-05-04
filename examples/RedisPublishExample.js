@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-var redis = require('redis');
-var RedisPubSubAdapter = require('../src/RedisPubSubAdapter');
+let redis = require('redis');
+let RedisPubSubAdapter = require('../src/RedisPubSubAdapter');
 
 let client = redis.createClient({
   host: 'redis',
-  port: 6379
+  port: 6379,
 });
 
 let adapter = new RedisPubSubAdapter(client);
