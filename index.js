@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module pubsubRedis */
+/** @module @superbalist/js-pubsub-redis */
 
 let RedisPubSubAdapter = require('./src/RedisPubSubAdapter');
 

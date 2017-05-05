@@ -10,7 +10,7 @@ let Utils = require('@superbalist/js-pubsub').Utils;
 /**
  * RedisPubSubAdapter Class
  *
- * @implements {module:pubsub.PubSubAdapterInterface}
+ * @implements {module:@superbalist/js-pubsub.PubSubAdapterInterface}
  * @example
  * let redis = require('redis');
  * let RedisPubSubAdapter = require('@superbalist/js-pubsub-redis');
