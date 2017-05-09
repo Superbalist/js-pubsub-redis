@@ -1,7 +1,7 @@
 'use strict';
 
 let redis = require('redis');
-let RedisPubSubAdapter = require('../src/RedisPubSubAdapter');
+let RedisPubSubAdapter = require('../lib/RedisPubSubAdapter');
 
 let client = redis.createClient({
   host: 'redis',
