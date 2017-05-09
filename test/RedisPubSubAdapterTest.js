@@ -4,7 +4,7 @@ let chai = require('chai');
 let expect = chai.expect;
 let sinon = require('sinon');
 let redis = require('redis');
-let RedisPubSubAdapter = require('../src/RedisPubSubAdapter');
+let RedisPubSubAdapter = require('../lib/RedisPubSubAdapter');
 
 describe('RedisPubSubAdapter', () => {
   describe('construct instance', () => {
