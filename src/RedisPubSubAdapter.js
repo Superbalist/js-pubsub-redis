@@ -69,7 +69,7 @@ class RedisPubSubAdapter {
    * });
    */
   publish(channel, message) {
-    this.client.publish(channel, message);
+    this.client.publish(channel, Utils.serializeMessagePayload(message));
   }
 }
 

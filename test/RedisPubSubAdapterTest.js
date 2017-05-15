@@ -47,7 +47,7 @@ describe('RedisPubSubAdapter', () => {
 
       adapter.subscribe('my_channel', handler);
 
-      client.on.yield('my_channel', 'Hello World!');
+      client.on.yield('my_channel', '"Hello World!"');
 
       sinon.assert.calledOnce(handler);
       sinon.assert.calledWith(handler, 'Hello World!');
@@ -65,7 +65,7 @@ describe('RedisPubSubAdapter', () => {
 
       adapter.subscribe('my_channel', handler);
 
-      client.on.yield('my_channel', 'Hello World!');
+      client.on.yield('my_channel', '"Hello World!"');
       client.on.yield('my_channel', '{"hello":"world"}');
 
       sinon.assert.calledTwice(handler);
@@ -84,10 +84,10 @@ describe('RedisPubSubAdapter', () => {
       let adapter = new RedisPubSubAdapter(client);
 
       adapter.publish('my_channel', 'Hello World!');
-      adapter.publish('another_channel', '{"hello":"world"}');
+      adapter.publish('another_channel', {hello: 'world'});
 
       sinon.assert.calledTwice(client.publish);
-      sinon.assert.calledWith(client.publish, 'my_channel', 'Hello World!');
+      sinon.assert.calledWith(client.publish, 'my_channel', '"Hello World!"');
       sinon.assert.calledWith(client.publish, 'another_channel', '{"hello":"world"}');
     });
   });

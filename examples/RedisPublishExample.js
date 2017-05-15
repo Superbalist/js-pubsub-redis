@@ -9,7 +9,7 @@ let client = redis.createClient({
 });
 
 let adapter = new RedisPubSubAdapter(client);
-adapter.publish('my_channel', '{"first_name":"Matthew"}');
+adapter.publish('my_channel', {first_name: 'Matthew'});
 adapter.publish('my_channel', 'Hello World');
 
 client.quit();
