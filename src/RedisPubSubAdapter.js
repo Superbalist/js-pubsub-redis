@@ -46,8 +46,10 @@ class RedisPubSubAdapter {
    * });
    */
   subscribe(channel, handler) {
-    this.client.on('message', (channel, message) => {
-      handler(Utils.unserializeMessagePayload(message));
+    this.client.on('message', (c, message) => {
+      if (c === channel) {
+        handler(Utils.unserializeMessagePayload(message));
+      }
     });
 
     this.client.subscribe(channel);
