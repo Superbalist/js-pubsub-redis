@@ -91,4 +91,24 @@ describe('RedisPubSubAdapter', () => {
       sinon.assert.calledWith(client.publish, 'another_channel', '{"hello":"world"}');
     });
   });
+
+  describe('publishBatch', () => {
+    it('should publish multiple messages to a channel', () => {
+      let client = sinon.createStubInstance(redis.RedisClient);
+
+      client.publish = sinon.stub();
+
+      let adapter = new RedisPubSubAdapter(client);
+
+      let messages = [
+        'message 1',
+        'message 2',
+      ];
+      adapter.publishBatch('my_channel', messages);
+
+      sinon.assert.calledTwice(client.publish);
+      sinon.assert.calledWith(client.publish, 'my_channel', '"message 1"');
+      sinon.assert.calledWith(client.publish, 'my_channel', '"message 2"');
+    });
+  });
 });

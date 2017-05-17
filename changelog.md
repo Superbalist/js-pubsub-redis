@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 - 2017-05-17
+
+* Bump up @superbalist/js-pubsub to ^2.0.0
+* Add new publishBatch method to RedisPubSubAdapter
+
 ## 1.0.3 - 2017-05-16
 
 * Fix to bug where all subscribers on same client receive all messages, regardless of the channel
