@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Superbalist/js-pubsub-redis#readme",
   "dependencies": {
-    "@superbalist/js-pubsub": "^1.0.0",
+    "@superbalist/js-pubsub": "^2.0.0",
     "redis": "^2.7.1"
   },
   "devDependencies": {
