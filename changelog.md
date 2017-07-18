@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 - 2017-07-18
+
+* Change publish and publishBatch methods to return a promise
+
 ## 2.0.0 - 2017-05-17
 
 * Bump up @superbalist/js-pubsub to ^2.0.0

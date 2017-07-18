@@ -79,16 +79,26 @@ describe('RedisPubSubAdapter', () => {
     it('should publish the message to a channel', () => {
       let client = sinon.createStubInstance(redis.RedisClient);
 
-      client.publish = sinon.stub();
+      client.publishAsync = sinon.stub();
+      client.publishAsync.onCall(0)
+        .returns('result1');
+      client.publishAsync.onCall(1)
+        .returns('result2');
 
       let adapter = new RedisPubSubAdapter(client);
 
-      adapter.publish('my_channel', 'Hello World!');
-      adapter.publish('another_channel', {hello: 'world'});
+      let promises = [];
 
-      sinon.assert.calledTwice(client.publish);
-      sinon.assert.calledWith(client.publish, 'my_channel', '"Hello World!"');
-      sinon.assert.calledWith(client.publish, 'another_channel', '{"hello":"world"}');
+      promises.push(adapter.publish('my_channel', 'Hello World!'));
+      promises.push(adapter.publish('another_channel', {hello: 'world'}));
+
+      return Promise.all(promises).then((results) => {
+        sinon.assert.calledTwice(client.publishAsync);
+        sinon.assert.calledWith(client.publishAsync, 'my_channel', '"Hello World!"');
+        sinon.assert.calledWith(client.publishAsync, 'another_channel', '{"hello":"world"}');
+
+        expect(results).to.deep.equal(['result1', 'result2']);
+      });
     });
   });
 
@@ -96,7 +106,11 @@ describe('RedisPubSubAdapter', () => {
     it('should publish multiple messages to a channel', () => {
       let client = sinon.createStubInstance(redis.RedisClient);
 
-      client.publish = sinon.stub();
+      client.publishAsync = sinon.stub()
+      client.publishAsync.onCall(0)
+        .returns('result1');
+      client.publishAsync.onCall(1)
+        .returns('result2');
 
       let adapter = new RedisPubSubAdapter(client);
 
@@ -104,11 +118,13 @@ describe('RedisPubSubAdapter', () => {
         'message 1',
         'message 2',
       ];
-      adapter.publishBatch('my_channel', messages);
+      return adapter.publishBatch('my_channel', messages).then((results) => {
+        sinon.assert.calledTwice(client.publishAsync);
+        sinon.assert.calledWith(client.publishAsync, 'my_channel', '"message 1"');
+        sinon.assert.calledWith(client.publishAsync, 'my_channel', '"message 2"');
 
-      sinon.assert.calledTwice(client.publish);
-      sinon.assert.calledWith(client.publish, 'my_channel', '"message 1"');
-      sinon.assert.calledWith(client.publish, 'my_channel', '"message 2"');
+        expect(results).to.deep.equal(['result1', 'result2']);
+      });
     });
   });
 });

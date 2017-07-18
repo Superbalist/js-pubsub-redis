@@ -1,6 +1,6 @@
 {
   "name": "@superbalist/js-pubsub-redis",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A Redis adapter for the js-pubsub package",
   "main": "lib/index.js",
   "scripts": {
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/Superbalist/js-pubsub-redis#readme",
   "dependencies": {
-    "@superbalist/js-pubsub": "^2.0.0",
+    "@superbalist/js-pubsub": "^3.0.0",
+    "bluebird": "^3.5.0",
     "redis": "^2.7.1"
   },
   "devDependencies": {
