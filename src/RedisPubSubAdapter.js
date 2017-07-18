@@ -1,6 +1,7 @@
 'use strict';
 
 let Utils = require('@superbalist/js-pubsub').Utils;
+let bluebird = require('bluebird');
 
 /**
  * @callback subscriberCallback
@@ -32,6 +33,9 @@ class RedisPubSubAdapter {
     /**
      * @type {RedisClient}
      */
+    if (typeof client.publishAsync !== 'function') {
+      client = bluebird.promisifyAll(client);
+    }
     this.client = client;
   }
 
@@ -40,6 +44,7 @@ class RedisPubSubAdapter {
    *
    * @param {string} channel
    * @param {subscriberCallback} handler - The callback to run when a message is received
+   * @return {Promise<*>}
    * @example
    * adapter.subscribe('my_channel', (message) => {
    *   console.log(message);
@@ -60,6 +65,7 @@ class RedisPubSubAdapter {
    *
    * @param {string} channel
    * @param {*} message - The message payload
+   * @return {Promise<*>}
    * @example
    * // publish a string
    * adapter.publish('my_channel', 'Hello World');
@@ -71,7 +77,7 @@ class RedisPubSubAdapter {
    * });
    */
   publish(channel, message) {
-    this.client.publish(channel, Utils.serializeMessagePayload(message));
+      return this.client.publishAsync(channel, Utils.serializeMessagePayload(message));
   }
 
   /**
@@ -79,6 +85,7 @@ class RedisPubSubAdapter {
    *
    * @param {string} channel
    * @param {*[]} messages
+   * @return {Promise<*>}
    * @example
    * let messages = [
    *   'message 1',
@@ -87,9 +94,13 @@ class RedisPubSubAdapter {
    * adapter.publishBatch('my_channel', messages);
    */
   publishBatch(channel, messages) {
+    let promises = [];
+
     for (let message of messages) {
-      this.publish(channel, message);
+      promises.push(this.publish(channel, message));
     }
+
+    return Promise.all(promises);
   }
 }
 
